@@ -19,6 +19,20 @@ pipeline {
         }
     }
 }
+
+stages {
+    stage('Build LMS') {
+        steps {
+            echo 'LMS Build'
+            sh """
+                cd webapp
+                npm install
+                npm run build
+            """
+        }
+    }
+}
+    
         
     
             
