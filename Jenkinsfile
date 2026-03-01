@@ -62,8 +62,8 @@ pipeline {
                         curl -u admin:nexus12345 -O \
                         http://18.208.251.206:8081/repository/lms/dist-${version}.zip
 
-                        sudo rm -rf /var/www/html/*
-                        sudo unzip -o dist-${version}.zip -d /var/www/html
+                        rm -rf /var/www/html/*
+                        unzip -o dist-${version}.zip -d /var/www/html
                     """
                 }
             }
