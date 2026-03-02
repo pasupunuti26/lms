@@ -9,7 +9,7 @@ pipeline {
                 sh '''
                     cd webapp
                     docker run --rm \
-                    -e SONAR_HOST_URL="http://35.172.194.59:9000" \
+                    -e SONAR_HOST_URL="http://13.222.159.146:9000" \
                     -e SONAR_TOKEN="your_sonar_token_here" \
                     -v "$(pwd):/usr/src" \
                     sonarsource/sonar-scanner-cli \
