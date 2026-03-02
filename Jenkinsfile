@@ -31,5 +31,39 @@ pipeline {
             }
         }
 
+        stage('Release LMS') {
+            steps {
+                script {
+                    def packageJson = readJSON file: 'webapp/package.json'
+                    def version = packageJson.version
+
+                    sh """
+                    cd webapp
+                    zip -r lms-${version}.zip dist/*
+
+                    curl -v -u admin:nexus12345 \
+                    --upload-file lms-${version}.zip \
+                    http://13.222.159.146:8081/repository/lms/lms-${version}.zip
+                    """
+                }
+            }
+        }
+
+        stage('Deploy LMS') {
+            steps {
+                script {
+                    def packageJson = readJSON file: 'webapp/package.json'
+                    def version = packageJson.version
+
+                    sh """
+                    curl -u admin:nexus12345 -O \
+                    http://13.222.159.146:8081/repository/lms/lms-${version}.zip
+
+                    sudo rm -rf /var/www/html/*
+                    sudo unzip -o lms-${version}.zip -d /var/www/html/
+                    """
+                }
+            }
+        }
     }
-}
+}    
