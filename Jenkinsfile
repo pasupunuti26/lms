@@ -9,7 +9,7 @@ pipeline {
                 sh '''
                 cd webapp
                 docker run --rm \
-                -e SONAR_HOST_URL="http://13.222.159.146:9000" \
+                -e SONAR_HOST_URL="http://54.196.218.167:9000" \
                 -e SONAR_TOKEN="sqp_fe2ca190a3fc1d77ec6ab910fe599b0077bd8e55" \
                 -v "$PWD:/usr/src" \
                 sonarsource/sonar-scanner-cli \
@@ -43,7 +43,7 @@ pipeline {
 
                     curl -v -u admin:nexus12345 \
                     --upload-file lms-${version}.zip \
-                    http://13.222.159.146:8081/repository/lms/lms-${version}.zip
+                    http://54.196.218.167:8081/repository/lms/lms-${version}.zip
                     """
                 }
             }
@@ -57,7 +57,7 @@ pipeline {
 
                     sh """
                     curl -u admin:nexus12345 -O \
-                    http://13.222.159.146:8081/repository/lms/lms-${version}.zip
+                    http://54.196.218.167:8081/repository/lms/lms-${version}.zip
 
                     sudo rm -rf /var/www/html/*
                     sudo unzip -o lms-${version}.zip -d /var/www/html/
